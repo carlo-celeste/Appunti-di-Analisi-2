@@ -1,0 +1,853 @@
+\documentclass[11pt,a4paper]{report}
+
+% ============================================================================
+% PACCHETTI
+% ============================================================================
+\usepackage[utf8]{inputenc}
+\usepackage[italian]{babel}
+\usepackage{amsmath,amssymb,amsthm}
+\usepackage{graphicx}
+\usepackage{caption}
+\usepackage{geometry}
+\usepackage{fancyhdr}
+\usepackage{xcolor}
+\usepackage{array}
+\usepackage{colortbl}
+\usepackage{float}
+\usepackage{mdframed}
+\usepackage{enumitem}
+\usepackage{cancel}
+\usepackage[hidelinks]{hyperref}
+\usepackage{titlesec}
+\usepackage{tikz}
+\usepackage{tcolorbox}
+\tcbuselibrary{skins,breakable}
+\usetikzlibrary{patterns,shadings}
+
+% ============================================================================
+% IMPOSTAZIONI PAGINA
+% ============================================================================
+\geometry{
+    top=2cm,
+    bottom=2cm,
+    left=2.5cm,
+    right=2.5cm,
+    headheight=1cm
+}
+
+% Header personalizzato
+\pagestyle{fancy}
+\fancyhf{}
+\lhead{Carlo Celeste}
+\chead{Analisi II: Funzioni di più variabili}
+\rhead{\thepage}
+\renewcommand{\headrulewidth}{0.5pt}
+
+\setlength{\parindent}{0pt}
+
+% ============================================================================
+% COLORI PERSONALIZZATI
+% ============================================================================
+\definecolor{defcolor}{RGB}{0,102,204}      % Blu per definizioni
+\definecolor{thmcolor}{RGB}{204,0,102}      % Magenta per teoremi
+\definecolor{notecolor}{RGB}{255,235,205}   % Arancione chiaro per note
+\definecolor{tableheader}{RGB}{204,0,102}   % Magenta per header tabelle
+
+% ============================================================================
+% FORMATTAZIONE CAPITOLI
+% ============================================================================
+\titleformat{\chapter}[hang]
+    {\normalfont\huge\bfseries}
+    {}
+    {0pt}
+    {\Huge}
+
+% ============================================================================
+% LOCALIZZAZIONE ITALIANA
+% ============================================================================
+\renewcommand{\contentsname}{Indice}
+
+% ============================================================================
+% AMBIENTI TEOREMATICI
+% ============================================================================
+% Stile per definizioni
+\newtheoremstyle{defstyle}
+    {10pt}                          % Spazio sopra
+    {10pt}                          % Spazio sotto
+    {\itshape}                      % Font del corpo
+    {}                              % Indentazione
+    {\bfseries\color{defcolor}}     % Font intestazione
+    {.}                             % Punteggiatura dopo intestazione
+    { }                             % Spazio dopo intestazione
+    {}                              % Specifica intestazione
+
+\theoremstyle{defstyle}
+\newtheorem{definizione}{Definizione}[section]
+
+% Stile per teoremi
+\newtheoremstyle{thmstyle}
+    {10pt}
+    {10pt}
+    {\itshape}
+    {}
+    {\bfseries\color{thmcolor}}
+    {.}
+    { }
+    {}
+
+\theoremstyle{thmstyle}
+\newtheorem{teorema}{Teorema}[section]
+\newtheorem{proposizione}{Proposizione}[section]
+\newtheorem{lemma}{Lemma}[section]
+\newtheorem{corollario}{Corollario}[section]
+
+% Stile per osservazioni
+\theoremstyle{remark}
+\newtheorem*{osservazione}{Osservazione}
+\newtheorem*{esempio}{Esempio}
+
+% ============================================================================
+% AMBIENTI PERSONALIZZATI PER STUDIO
+% ============================================================================
+
+% Spazio per note personali
+\newcommand{\spazioscritti}[1][4cm]{%
+    \vspace{0.5cm}
+    \begin{mdframed}[
+        backgroundcolor=notecolor,
+        linecolor=orange,
+        linewidth=1.5pt,
+        roundcorner=5pt,
+        innertopmargin=10pt,
+        innerbottommargin=10pt,
+        innerleftmargin=10pt,
+        innerrightmargin=10pt
+    ]
+    {\large\textbf{Spazio per note:}}
+    \vspace{#1}
+    \end{mdframed}
+    \vspace{0.5cm}
+}
+
+% ============================================================================
+% COMANDI UTILI
+% ============================================================================
+
+% Separatore visivo tra sezioni
+\newcommand{\separatore}{%
+    \vspace{0.8cm}
+    \rule{\textwidth}{1pt}
+    \vspace{0.8cm}
+}
+
+% Mathbf revisionato
+\renewcommand{\mathbf}[1]{\underline{\boldsymbol{#1}}}
+
+% ============================================================================
+% NOTAZIONE DEL GRADIENTE
+% ============================================================================
+\let\oldnabla\nabla
+\renewcommand{\nabla}{\oldnabla\mkern-3mu}
+
+% ============================================================================
+% INIZIO DOCUMENTO
+% ============================================================================
+\begin{document}
+
+% Pagina del titolo
+\begin{center}
+    \vspace*{2cm}
+    {\Huge\bfseries Corso di Analisi 2\\[0.3cm] Domande e risposte al macro-argomento:\\[0.3cm] CENNI DI ALGEBRA LINEARE}\\[1cm]
+    {\large Ultima modifica: \today}\\[0.5cm]
+    \vspace{2cm}
+\end{center}
+
+\newpage
+
+% Indice
+\tableofcontents
+
+\newpage
+
+% ============================================================================
+% CONTENUTO DEL DOCUMENTO
+% ============================================================================
+\chapter{Cenni di Algebra Lineare sugli spazi vettoriali}
+\section{Calcolo infinitesimale per le curve}
+\textbf{34. Cos'è {\color{red} $\mathbb{R}^n$} e perché possiamo considerarlo come {\color{red}spazio metrico}?}
+
+Dal punto di vista algebrico $\mathbb{R}^n$ è l'insieme di tutte le ennuple ordinate di numeri reali, ossia una generalizzazione di n dimensioni, un grande contentitore di numeri.
+
+Viene considerato spazio metrico\footnote{Per definire uno "spazio metrico", non basta avere un insieme di punti; abbiamo bisogno di una funzione, chiamata metrica (o distanza), che ci dica quanto due punti siano lontani tra loro. Esiste un modo oggettivo per calcolare la distanza tra due punti} perché possiamo definirvi la distanza euclidea.
+
+Quindi, $\mathbb{R}^n$ è lo spazio dove "vivono" i punti fatti da n coordinate.\\
+
+\textbf{35. Quali sono le {\color{red}operazioni fondamentali} che posso definire in uno spazio metrico $\mathbb{R}^n$?}
+
+In uno spazio $\mathbb{R}^n$ sono considerati $\mathbf{x}=\{ x_1,x_2...x_n \} \in \mathbb{R}^n$ vettori, con le seguenti proprietà:
+\begin{itemize}
+    \item $\forall c \in \mathbb{R}$ e $\mathbf{x} \in \mathbb{R}^n$\\
+    $c\mathbf{x}=\{ cx_1,cx_2,...,cx_n \} \in \mathbb{R}^n$
+    \item $\forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n$ \\
+    $\mathbf{x} + \mathbf{y} = (x_1+y_1,...,x_n+y_n)$
+\end{itemize}
+
+\textbf{36. Che cos'è il {\color{red}prodotto scalare} tra due vettori di $\mathbb{R}^n$ e quali sono le sue proprietà?}
+
+\begin{definizione}[Prodotto Scalare] E' una funzione definita come \begin{center}
+    $<,>: \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}$
+\end{center} 
+Ed il prodotto scalare, normalmente, è definito $<\mathbf{x}, \mathbf{y}> :=x_1y_1+...+x_ny_n \in \mathbb{R},  \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n$
+\end{definizione}
+Le sue proprietà sono:
+\begin{itemize}
+    \item \textbf{Bilinearità}\\
+    $\forall \mathbf{x_1}, \mathbf{x_2}, \mathbf{y} \in \mathbb{R}^n$ e $\alpha,\beta \in \mathbb{R}$ \\
+    $<\alpha \mathbf{x_1} + \beta \mathbf{x_2}, \mathbf{y}> = \alpha<\mathbf{x_1}, y>+\beta<\mathbf{x_2}, \mathbf{y}>$ \\
+    Vale lo stessso per $<\alpha y_1 + \beta y_2, x>$
+    \item \textbf{Simmetria}\\
+     $\forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n$ \\
+     $<\mathbf{x},\mathbf{y}>=<\mathbf{y},\mathbf{x}>$
+     \item \textbf{Positività}\\
+     $\forall \mathbf{x} \in \mathbb{R}^n$ \\
+     $<\mathbf{x},\mathbf{x}>$ maggiore di $0$, oppure $<\mathbf{x},\mathbf{x}> = 0 \Leftrightarrow \mathbf{x} =0$
+\end{itemize}
+
+\newpage
+\textbf{37. Come si definisce la lunghezza (o {\color{red}norma}) di un vettore $x$ attraverso il prodotto scalare e perché {\color{red}lunghezza di un vettore} è una norma?}
+\begin{definizione}[La lunghezza del vettore: Norma] Sia $\mathbf{x} \in \mathbb{R}^n$ un vettore, la sua lunghezza o norma è definita come la radice quadrata del prodotto scalare del vettore con se stesso:
+\begin{center}
+     $\sqrt{<\mathbf{x},\mathbf{x}>}:=||\mathbf{x}|| $
+\end{center}
+\end{definizione}
+Essendo in $\mathbb{R}^n$ la norma soddisfa la proprietà di positività del prodotto scalare, quindi $||\mathbf{x}||:\mathbb{R}^n\to \mathbb{R}_0^{+}$.
+
+La radice quadrata risulta importante nella rappresetazione della norma perché siamo in $\mathbb{R}^n$, di conseguenza, il prodotto scalare di un vettore per se stesso è la somma dei quadrati delle componenti del vettore:
+\begin{center}
+    $<\mathbf{x},\mathbf{x}> = x_1^2+x_2^2+...+x_n^2$
+\end{center}
+Per il teorema di Pitagora ($a^2+b^2=c^2$) e per la proprietà di omogeneità bisogna estrarre la radice per trovare la lunghezza effettiva ($c$) e per mantenere la coerenza con la nostra idea di "scala".\\
+
+\textbf{38. Quali sono {\color{red}le proprietà} della norma?}
+
+La norma verifica le seguenti proprietà:
+\begin{itemize}
+    \item \textbf{Positività}\\
+    $\forall \mathbf{x} \in \mathbb{R}^n$\\
+    $||\mathbf{x}|| = 0 \Leftrightarrow \mathbf{x} = 0$ 
+    \item \textbf{Omogeneità}\\
+    $\forall \mathbf{x} \in \mathbb{R}^n$ e $\forall \lambda \in \mathbb{R}$\\
+    $||\lambda \mathbf{x}|| = |\lambda| \cdot ||\mathbf{x}||$ 
+    \item \textbf{Disuguaglianza triangolare}\\
+    $\forall \mathbf{x}, \mathbf{y}  \in \mathbb{R}^n$\\
+    $||\mathbf{x}+\mathbf{y}|| \leq ||\mathbf{x}|| +||\mathbf{y}||$ 
+
+    \textbf{\color{thmcolor}DIMOSTRAZIONE}
+
+    Sviluppo del quadrato della norma
+    \[
+    \|x+y\|^2 = \langle x+y, x+y \rangle
+    \]
+    
+    Proprietà di bilinearità e simmetria
+    \begin{align*}
+    \|x+y\|^2 &= \langle x,x \rangle + 2\langle x,y \rangle + \langle y,y \rangle \\
+    \|x+y\|^2 &= \|x\|^2 + 2\langle x,y \rangle + \|y\|^2
+    \end{align*}
+    
+    Applicazione della disuguaglianza di Cauchy-Schwarz
+    ($\langle x,y \rangle \leq \|x\|\|y\|$):
+    \[
+    \|x+y\|^2 \leq \|x\|^2 + 2\|x\|\|y\| + \|y\|^2
+    \]
+    
+    Riconoscimento del quadrato di binomio
+    \[
+    \|x+y\|^2 \leq (\|x\| + \|y\|)^2
+    \]
+    
+    Estrazione della radice quadrata (essendo termini non negativi)
+    \[
+    \|x+y\| \leq \|x\| + \|y\|
+    \]
+
+\hfill{\color{thmcolor}$\square$}
+    
+\end{itemize}
+
+\textbf{39. Enunciare e dimostrare {\color{red}la formula di Carnot}.}
+\begin{definizione}[Formula di Carnot]
+Per ogni $\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$, vale:
+\[
+\|\mathbf{x} + \mathbf{y}\|^2 = \|\mathbf{x}\|^2 + \|\mathbf{y}\|^2 + 2\langle\mathbf{x}, \mathbf{y}\rangle
+\]
+\end{definizione}
+
+La formula di Carnot generalizza il teorema di Pitagora agli spazi vettoriali dotati di prodotto scalare. Essa ci dice come calcolare il quadrato della norma della somma di due vettori in termini delle norme dei singoli vettori e del loro prodotto scalare.
+Geometricamente, se pensiamo a $\mathbf{x}$ e $\mathbf{y}$ come ai lati di un parallelogramma, $\mathbf{x} + \mathbf{y}$ rappresenta la diagonale.\\
+
+\textbf{{\color{thmcolor}DIMOSTRAZIONE}}
+
+Partiamo dalla definizione di norma indotta dal prodotto scalare:
+\begin{align*}
+\|\mathbf{x} + \mathbf{y}\|^2 &= \langle\mathbf{x} + \mathbf{y}, \mathbf{x} + \mathbf{y}\rangle \\
+&= \langle\mathbf{x}, \mathbf{x}\rangle + \langle\mathbf{x}, \mathbf{y}\rangle + \langle\mathbf{y}, \mathbf{x}\rangle + \langle\mathbf{y}, \mathbf{y}\rangle
+\end{align*}
+
+Per la simmetria del prodotto scalare, $\langle\mathbf{x}, \mathbf{y}\rangle = \langle\mathbf{y}, \mathbf{x}\rangle$, quindi:
+\[
+\|\mathbf{x} + \mathbf{y}\|^2 = \|\mathbf{x}\|^2 + \|\mathbf{y}\|^2 + 2\langle\mathbf{x}, \mathbf{y}\rangle
+\]
+
+\textbf{Caso particolare}
+
+Quando i vettori $\mathbf{x}$ e $\mathbf{y}$ sono ortogonali, cioè $\langle\mathbf{x}, \mathbf{y}\rangle = 0$, la formula di Carnot si riduce al teorema di Pitagora:
+\[
+\|\mathbf{x} + \mathbf{y}\|^2 = \|\mathbf{x}\|^2 + \|\mathbf{y}\|^2
+\]
+Questa equivalenza è fondamentale:
+\[
+\langle\mathbf{x}, \mathbf{y}\rangle = 0 \quad \Leftrightarrow \quad \|\mathbf{x} + \mathbf{y}\|^2 = \|\mathbf{x}\|^2 + \|\mathbf{y}\|^2
+\] \\
+
+\hfill{\color{thmcolor}$\square$}
+
+La formula di Carnot è particolarmente utile nello studio dei limiti di funzioni vettoriali. Quando analizziamo il comportamento di $\|\mathbf{x} + \mathbf{y}\|$ in un intorno, possiamo:
+\begin{itemize}
+    \item Separare i contributi di $\|\mathbf{x}\|$ e $\|\mathbf{y}\|$
+    \item Valutare l'effetto del termine misto $2\langle\mathbf{x}, \mathbf{y}\rangle$
+    \item Riconoscere situazioni di ortogonalità dove il calcolo si semplifica
+\end{itemize}
+
+\textbf{40. Enunciare e dimostrare {\color{red}la disuguaglianza di Cauchy-Schwarz}.}
+\begin{teorema}[Disuguaglianza di Cauchy-Schwarz]
+Per ogni $\mathbf{x}, \mathbf{y} \in \mathbb{R}^n$, vale:
+\[
+|\langle\mathbf{x},\mathbf{y}\rangle| \leq \|\mathbf{x}\| \cdot \|\mathbf{y}\|
+\]
+
+Inoltre, vale l'uguaglianza se e solo se i vettori sono linearmente dipendenti, ossia:
+\[
+|\langle\mathbf{x},\mathbf{y}\rangle| = \|\mathbf{x}\| \cdot \|\mathbf{y}\| 
+\quad \Leftrightarrow \quad
+\text{$\mathbf{x}$ e $\mathbf{y}$ sono linearmente dipendenti}
+\]
+
+Equivalentemente: $\mathbf{x} = \mathbf{0}$ oppure $\mathbf{y} = \mathbf{0}$ oppure $\exists \lambda \in \mathbb{R} \setminus \{0\}$ tale che $\mathbf{x} = \lambda \mathbf{y}$.
+\end{teorema}
+
+\textbf{\color{thmcolor}{DIMOSTRAZIONE}}
+
+\textbf{\color{thmcolor}Caso 1}: Se $\mathbf{y} = \mathbf{0}$, entrambi i membri dell'disuguaglianza sono nulli e la tesi è verificata.
+\newpage
+\textbf{\color{thmcolor}Caso 2}: Supponiamo $\mathbf{y} \neq \mathbf{0}$. Consideriamo, per ogni $t \in \mathbb{R}$, il vettore:
+\[
+\mathbf{z}(t) = \mathbf{x} + t\mathbf{y}
+\]
+
+Per la positività della norma, $\|\mathbf{z}(t)\|^2 \geq 0$ per ogni $t$. Calcoliamo usando la formula di Carnot:
+\begin{align*}
+\|\mathbf{z}(t)\|^2 &= \|\mathbf{x} + t\mathbf{y}\|^2 \\
+&= \|\mathbf{x}\|^2 + 2t\langle\mathbf{x}, \mathbf{y}\rangle + t^2\|\mathbf{y}\|^2
+\end{align*}
+
+Questa è una funzione quadratica in $t$ della forma $at^2 + bt + c$ con:
+\begin{itemize}
+    \item $a = \|\mathbf{y}\|^2 > 0$ (poiché $\mathbf{y} \neq \mathbf{0}$)
+    \item $b = 2\langle\mathbf{x}, \mathbf{y}\rangle$
+    \item $c = \|\mathbf{x}\|^2 \geq 0$
+\end{itemize}
+
+Poiché questa parabola è sempre non negativa (con $a > 0$), il discriminante deve soddisfare:
+\[
+\Delta = b^2 - 4ac \leq 0
+\]
+
+Sostituendo i valori:
+\begin{align*}
+(2\langle\mathbf{x}, \mathbf{y}\rangle)^2 - 4\|\mathbf{y}\|^2\|\mathbf{x}\|^2 &\leq 0 \\
+4\langle\mathbf{x}, \mathbf{y}\rangle^2 &\leq 4\|\mathbf{x}\|^2\|\mathbf{y}\|^2 \\
+\langle\mathbf{x}, \mathbf{y}\rangle^2 &\leq \|\mathbf{x}\|^2\|\mathbf{y}\|^2
+\end{align*}
+
+Prendendo la radice quadrata di entrambi i membri (entrambi non negativi):
+\[
+|\langle\mathbf{x}, \mathbf{y}\rangle| \leq \|\mathbf{x}\| \cdot \|\mathbf{y}\|
+\]
+
+\hfill{\color{thmcolor}$\square$}
+
+\textbf{\color{thmcolor}Caso di uguaglianza}: L'uguaglianza $\langle\mathbf{x}, \mathbf{y}\rangle| = \|\mathbf{x}\| \cdot \|\mathbf{y}\|$ vale se e solo se $\Delta = 0$.
+
+Questo significa che esiste $t_0 \in \mathbb{R}$ tale che:
+\[
+\|\mathbf{x} + t_0\mathbf{y}\|^2 = 0 \quad \Rightarrow \quad \mathbf{x} + t_0\mathbf{y} = \mathbf{0}
+\]
+
+Da cui:
+\[
+\mathbf{x} = -t_0\mathbf{y}
+\]
+
+Ponendo $\lambda = -t_0$, otteniamo $\mathbf{x} = \lambda\mathbf{y}$ con $\lambda \in \mathbb{R}$.
+
+Quindi l'uguaglianza vale se e solo se i vettori sono linearmente dipendenti.
+
+C'è uguaglianza se $\mathbf{y} = \mathbf{0}$, o se $\mathbf{x} = \mathbf{0}$, allora entrambi i membri sono zero oppure $\mathbf{x} = \lambda\mathbf{y}$ con $\lambda \in \mathbb{R}$, $\lambda \neq 0$:
+    \begin{align*}
+        |\langle\mathbf{x}, \mathbf{y}\rangle| &= |\langle\lambda\mathbf{y}, \mathbf{y}\rangle| = |\lambda| \cdot \|\mathbf{y}\|^2 \\
+        \|\mathbf{x}\| \cdot \|\mathbf{y}\| &= \|\lambda\mathbf{y}\| \cdot \|\mathbf{y}\| = |\lambda| \cdot \|\mathbf{y}\|^2
+    \end{align*}
+che sono uguali.
+
+\hfill{\color{thmcolor}$\square$}
+
+\textbf{41. {\color{red}Geometricamente la disuguaglianza di Cauchy-Schwarz} cosa ci permette di dire?}
+
+Partendo dal fatto che il prodotto scalare si può scrivere come
+\[
+\langle\mathbf{x}, \mathbf{y}\rangle = \|\mathbf{x}\| \cdot \|\mathbf{y}\| \cdot \cos\theta
+\]
+dove $\theta$ è l'angolo tra i vettori, la disuguaglianza diventa:
+\[
+  \|\mathbf{x}\| \cdot \|\mathbf{y}\| \cdot \cos\theta \leq \|\mathbf{x}\| \cdot \|\mathbf{y}\| 
+\]
+Semplificando (dividendo per $\|\mathbf{x}\| \cdot \|\mathbf{y}\|$) diventa 
+\[
+\cos \theta \leq 1
+\]
+che è sempre vera. 
+
+\newpage
+L'uguaglianza vale quando $|\cos\theta| = 1$, ossia:
+\begin{itemize}
+    \item $\theta = 0$: vettori paralleli ($\lambda > 0$)
+    \item $\theta = \pi$: vettori antiparalleli ($\lambda < 0$)
+\end{itemize}
+
+\textbf{41. Cos'è la {\color{red}distanza} e come si mette in relazione con la norma (euclidea)?}
+
+\begin{definizione}[Norma euclidea]
+Per ogni $\mathbf{x} = (x_1, x_2, \ldots, x_n) \in \mathbb{R}^n$:
+\[
+\|\mathbf{x}\|_2 = |\mathbf{x}| := \sqrt{\langle\mathbf{x},\mathbf{x}\rangle} = \sqrt{\sum_{i=1}^n x_i^2} \in \mathbb{R}_0^{+}
+\]
+\end{definizione}
+Premettiamo che:
+\begin{itemize}
+    \item La \textbf{Norma} $\|\cdot\| : \mathbb{R}^n \to \mathbb{R}_0^{+}$ è una funzione che assegna a ogni vettore un numero reale non negativo, che quindi rappresenta la sua lunghezza;
+    \item La \textbf{Distanza} (o metrica) $d : X \times X \to \mathbb{R}_0^{+}$ è una funzione che misura quanto sono lontani due punti nello spazio.
+\end{itemize}
+
+\begin{definizione}[Distanza indotta dalla Norma]
+Sia $\|\cdot\|$ una norma su $\mathbb{R}^n$. La distanza indotta dalla norma è:
+\[
+d : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}_0^{+} \quad \text{tale che} \quad d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x} - \mathbf{y}\|
+\]
+\end{definizione}
+Essa eredita le proprietà della norma: positività, simmetria e disuguglianza triangolare.
+
+Quando consideriamo la norma euclidea $\|\cdot\|_2$, la distanza euclidea diventa:
+\[
+d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x} - \mathbf{y}\|_2 = \sqrt{\sum_{i=1}^n (x_i - y_i)^2}
+\]
+
+\textbf{\color{thmcolor}DIMOSTRAZIONE}
+
+Verifichiamo come le proprietà della distanza derivano dalla norma euclidea:
+
+\begin{enumerate}
+    \item \textbf{\color{thmcolor}Positività (1)} Essendo $\|\mathbf{x} - \mathbf{y}\|_2$ una norma, per definizione è sempre non negativa:
+    \[
+    d(\mathbf{x}, \mathbf{y}) = \|\mathbf{x} - \mathbf{y}\|_2 \geq 0
+    \]
+    
+    \item \textbf{\color{thmcolor}Positività (2)} La norma è zero se e solo se il vettore è nullo:
+    \begin{align*}
+    d(\mathbf{x}, \mathbf{y}) = 0 &\Leftrightarrow \|\mathbf{x} - \mathbf{y}\|_2 = 0 \\
+    &\Leftrightarrow \mathbf{x} - \mathbf{y} = \mathbf{0} \\
+    &\Leftrightarrow \mathbf{x} = \mathbf{y}
+    \end{align*}
+    
+    \item \textbf{\color{thmcolor}Simmetria} Dalla proprietà di omogeneità della norma $\|\lambda \mathbf{v}\| = |\lambda| \cdot \|\mathbf{v}\|$:
+    \begin{align*}
+    d(\mathbf{x}, \mathbf{y}) &= \|\mathbf{x} - \mathbf{y}\|_2 \\
+    &= \|(-1)(\mathbf{y} - \mathbf{x})\|_2 \\
+    &= |-1| \cdot \|\mathbf{y} - \mathbf{x}\|_2 \\
+    &= \|\mathbf{y} - \mathbf{x}\|_2 \\
+    &= d(\mathbf{y}, \mathbf{x})
+    \end{align*}
+    
+    \item \textbf{\color{thmcolor}Disuguaglianza triangolare} Dalla disuguaglianza triangolare della norma $\|\mathbf{u} + \mathbf{v}\| \leq \|\mathbf{u}\| + \|\mathbf{v}\|$:
+    \begin{align*}
+    d(\mathbf{x}, \mathbf{z}) &= \|\mathbf{x} - \mathbf{z}\|_2 \\
+    &= \|(\mathbf{x} - \mathbf{y}) + (\mathbf{y} - \mathbf{z})\|_2 \\
+    &\leq \|\mathbf{x} - \mathbf{y}\|_2 + \|\mathbf{y} - \mathbf{z}\|_2 \\
+    &= d(\mathbf{x}, \mathbf{y}) + d(\mathbf{y}, \mathbf{z})
+    \end{align*}
+\end{enumerate}
+
+\hfill{\color{thmcolor}$\square$}
+
+
+\section{Elementi di topologia per uno spazio metrico}
+
+\textbf{42. Come si definisce {\color{red}uno spazio metrico}?}
+\begin{definizione}[Spazio metrico] Una coppia $(X,d)$ è un insieme $X$ a cui si associa una distanza (o metrica) $d$ come  $d: X \times X \to \mathbb{R}_0^+$, ossia ad ogni $(x,y) \in X$ si associa un numero reale non negativo $d(x,y)$
+\end{definizione}
+$X$ prenderà la forma di $\mathbb{R}^n$ se si tratta di uno spazio metrico dotato della distanza euclidea.\\
+
+\textbf{43. Cosa si intende quando si parla di {\color{red} distanza euclidea} e  di {\color{red} distanza del tassista}?}
+
+\begin{definizione}[Distanza Euclidea] E' una distanza fra due punti che prende la forma  
+\begin{center}
+    $ d(\mathbf{x}, \mathbf{y}) = ||\mathbf{x}- \mathbf{y}|| = \sqrt{<\mathbf{x}- \mathbf{y}, \mathbf{y}- \mathbf{x}>} = \sqrt{\sum_{i=1}^n (x_i - y_i)^2} = \sqrt{(x_1 - y_1)^2+...+(x_n - y_n)^2} $
+\end{center}
+\end{definizione}
+Ovviamente vale per $ \forall \mathbf{x}, \mathbf{y} \in \mathbb{R}^n$ e se $n = 1$ allora si parla della \textbf{distanza del tassista} o $d_1$ che prende la forma di: $d(\mathbf{x},\mathbf{y}) = |x_1-y_1|+|x_2-y_2|$ con $\mathbf{x},\mathbf{y} \in \mathbb{R}^2$
+
+ 
+\subsection{Successione negli spazi metrici}
+\textbf{44. Cosa si si intende per {\color{red}successione} in $\mathbb{R}^n$?}
+
+ Una successione in $\mathbb{R}$ è stata definita come una coppia composta da un sottoinsieme di $\mathbb{R}$ e un'applicazione di $\mathbb{N} \to \mathbb{R}$, mentre una successione $\{x_n\}$ in $\mathbb{R}^n$ è un sottoinsieme di $\mathbb{R}^n$ del tipo $\mathbf{x}_n = (\mathbf{x}_n^1,...,\mathbf{x}_n^n)$, ovvero composto da $n$ vettori di $n$ elementi.
+
+\begin{definizione}[Successione in $\mathbb{R}^n$] \leavevmode
+\begin{center}
+    $\mathbf{x}_n: \mathbb{N} \to \mathbb{R}$ tale che $n \to \{\mathbf{x}_n\}$
+\end{center}
+\end{definizione}
+\subsubsection{Convergenza (e Divergenza)}
+\textbf{45. Come si definisce {\color{red}la convergenza} attraverso la distanza euclidea?}
+
+Una successione $\{x_n\} \subset \mathbb{R}^n$ con $\mathbf{x}_n = (\mathbf{x}_n^1,...,\mathbf{x}_n^n)$ converge ad un vettore $\mathbf{x} = (x^1,...,x^n) \in \mathbb{R}^n$ se la distanza $d(\mathbf{x}_n, \mathbf{x}) = ||\mathbf{x}_n-\mathbf{x}|| \to 0$ quando $n \to +\infty$.\\
+\begin{definizione}[Convergenza] La definizione formale è molto simile a quella delle successioni in $\mathbb{R}$
+\begin{center}
+    $\forall \epsilon > 0 $ $ \exists n_\epsilon \in \mathbb{N}$ tale che  $d(\mathbf{x}_n, \mathbf{x}) = ||\mathbf{x}_n-\mathbf{x}|| < \epsilon, \forall n \geq n_\epsilon$
+\end{center}
+Quindi, per quanto sia piccola una distanza $\epsilon$, da un certo punto in poi tutti i termini della successione distano da $\mathbf{x}$ meno di $\epsilon$.
+\end{definizione}
+
+\textbf{46. Cosa significa che una successione ha {\color{red}limite convergente}?}
+
+ Parlando di convergenza , si può parlare anche di \textbf{limite convergente}: se una successione in $\mathbb{R}^n$ ha un limite che converge $\mathbf{x}$, allora le coordinate (o gli elementi) della successione convergono agli elementi di $\mathbf{x}$ ossia $\{\mathbf{x}_n^i\}$ converge a $\mathbf{x}^i$.
+ Quindi, un limite convergente di una successione in $\mathbb{R}^n$ prende la forma di
+ \begin{center}
+     $\lim_{n \to +\infty} d(\mathbf{x}_n, \mathbf{x}) = 0$
+ \end{center}
+ con $d(\mathbf{x}_n, \mathbf{x}) = ||\mathbf{x}_n-\mathbf{x}|| = \sqrt{\sum_{i=1}^n (\mathbf{x}_n^i - \mathbf{x}^i)^2} = \sqrt{(\mathbf{x}_n^1 - \mathbf{x}^1)^2+...+(\mathbf{x}_n^n - \mathbf{x}^n)^2}$.
+ \vspace{1em}
+ \\Quando diciamo che il limite tende a zero quando $n \to +\infty$ intendiamo formalmente che 
+ \begin{center}
+     $\forall i=1..n$ si ha $\mathbf{x}_n^i \to \mathbf{x}^i$
+ \end{center}
+Tutto ciò significa che $d(\mathbf{x}_k,\mathbf{x}) \to \mathbf{x} \text{ dove } \mathbf{x_k} \subset \mathbb{R}^n \text{ e } \mathbf{x}\in \mathbb{R}^n$ 
+Quindi affermare che $\{x_k\}$ converge ad $x$ è lo stesso che affermare:
+\[
+\{x_k\} \xrightarrow[k \to +\infty]{} x \in \mathbb{R}^n
+\;\Longleftrightarrow\;
+\{x_k^i\} \xrightarrow[k \to +\infty]{} x^i \quad \text{per ogni } i=1,\dots,n.
+\]
+\textbf{47. Quali {\color{red}proprietà} ha una successione convergente?}
+
+Definiamo le proprietà:
+\begin{enumerate}
+    \item \textbf{Unicità}
+    \\ La successione $\{ \mathbf{x}_n\} \subset \mathbb{R}^n$ ha \textbf{al più} un limite, che se esiste è unico;
+    \item \textbf{Limitatezza}
+    \\ Se la successione$\{ \mathbf{x}_n\} \subset \mathbb{R}^n$ converge, allora  è limitata, ovvero se i punti si avvicinano sempre più a un limite non possono "scappare all'infinito" ma saranno confinanti tutti in una regione limitata dello spazio. Più formalmente:
+    \begin{center}
+       $\lim_{n \to +\infty} d(\mathbf{x}_n, \mathbf{x}) = 0 \longrightarrow \exists \mathbf{x}_0 \in \mathbb{R}^n$ tale $d(\mathbf{x}_n, \mathbf{x}_0) < M$ con $M \in \mathbb{R}$ 
+    \end{center}
+    \item \textbf{Sottosuccessione}
+    \\ Una sottosuccessione $\{\mathbf{x}\}_{nk} \in \{\mathbf{x}\}_n$ con $k \in \mathbb{R}$ è convergente a $\mathbf{x}$ se solo se $\{\mathbf{x}\}_n$ converge $\mathbf{x}$
+\end{enumerate}
+
+\subsection{Intorno Sferico}
+\textbf{48. Cos'è {\color{red}una palla aperta}?}
+\begin{definizione}[Ball/Palla/Disco/Intorno Sferico] Sia $\mathbf{x}_0 \in \mathbb{R}^n$ fissato e $r > 0$ un numero reale positivo, si dice intorno sferico di centro $\mathbf{x}_0$ con raggio $r$ l'insieme
+\begin{center}
+    $B(\mathbf{x}_0, r) = \{\mathbf{x} \in \mathbb{R}^n:d(\mathbf{x}_0, \mathbf{x}) = ||\mathbf{x}_0 - \mathbf{x}|| < r\}$
+\end{center}
+\end{definizione}
+Informalmente, un intorno sferico (o "palla") è l'insieme di tutti i punti che stanno dentro una sfera.
+Immagina di prendere un punto $\mathbf{x}_0$ nello spazio, questo è il centro. Poi prendi un numero $r$, questo è il raggio. La ``palla'' $B(\mathbf{x}_0, r)$ contiene tutti i punti che distano meno di $r$ dal centro.\\
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.8]
+
+% --- CASO 2D: CERCHIO ---
+\begin{scope}[xshift=-5cm]
+    % Riempimento interno (la "palla")
+    \fill[blue!30, opacity=0.5] (0,0) circle (2cm);
+    
+    % Bordo tratteggiato (NON incluso)
+    \draw[blue!70, thick, dashed] (0,0) circle (2cm);
+    
+    % Raggio
+    \draw[->, thick] (0,0) -- (2,0);
+    \node at (1,0.3) {$r$};
+
+    % Centro
+    \fill[red] (0,0) circle (2pt);
+    
+    % Etichetta centro
+    \node[red, above] at (0,0.02) {$\mathbf{x}_0$};
+    
+    % Titolo
+    \node[font=\bfseries] at (0,2.8) {Caso 2D (Cerchio)};
+\end{scope}
+
+% --- CASO 3D: SFERA ---
+\begin{scope}[xshift=5cm]
+    % Sfera con shading radiale
+    \shade[ball color=blue!50, opacity=0.4] (0,0) circle (2cm);
+    
+    % Ellisse per dare profondità
+    \draw[blue!70, dashed, opacity=0.5] (0,0) ellipse (2cm and 0.6cm);
+    
+    % Bordo tratteggiato (NON incluso)
+    \draw[blue!70, thick, dashed] (0,0) circle (2cm);
+    
+    % Raggio
+    \draw[->, thick] (0,0) -- (1.4,1.4);
+    \node[font=\bfseries] at (0.5,0.9) {$r$};
+    
+    % Centro (sopra la linea)
+    \fill[red] (0,0) circle (2pt);
+    
+    % Etichetta centro più centrale
+    \node[red] at (0,-0.3) {$\mathbf{x}_0$};
+    
+    % Titolo
+    \node[font=\bfseries] at (0,2.8) {Caso 3D (Sfera)};
+\end{scope}
+
+\end{tikzpicture}
+\caption*{Rappresentazione di un intorno sferico in $\mathbb{R}^2$ e $\mathbb{R}^3$}
+\end{figure}
+\textbf{49. Come si definisce {\color{red}caso unidimensionale} in cui avendo $\mathbb{R}$ la palla aperta di centro $x_0$ e raggio $r>0$ è l'intervallo aperto $(\mathbf{x}_0-r, \mathbf{x}_0+r )$?}
+
+Sia uno spazio metrico $(\mathbb{R}, |...|)$ e siano $\mathbf{x_0} \in \mathbb{R}$ e $r> 0$  e $\forall n = 1$ 
+    \begin{center}
+        $B(\mathbf{x}_0, r) = \{ \mathbf{x} \in \mathbb{R}^n: d(\mathbf{x}_0, \mathbf{x})<r   \} =$\\ \vspace{0.5em}$= \{ \mathbf{x} \in \mathbb{R}^n: |\mathbf{x}_0- \mathbf{x}|<r \} =$\\ \vspace{0.5em}$= \{ \mathbf{x} \in \mathbb{R}^n: \mathbf{x} _0-r<\mathbf{x}<\mathbf{x} _0+r\} =$\\ \vspace{0.5em}$ = (\mathbf{x}_0-r, \mathbf{x}_0+r )$ \
+    \end{center}
+\textbf{50. In $\mathbb{R}^2$ {\color{red}con la distanza euclidea} che forma hanno le ball aperte?}
+
+
+Sia uno spazio metrico $(\mathbb{R}^2, d_2) \text{ e sia } \mathbf{x}=(x_1, x_2)$, siano $\mathbf{x}_0 \in \mathbb{R}^2$ e $r> 0$ 
+    \begin{center}
+        $B(\mathbf{x}_0, r) = \{ \mathbf{x} \in \mathbb{R}^2: d(\mathbf{x}_0, \mathbf{x})<r   \} =$\\ \vspace{0.5em}$= \{ x_{1,2}\in \mathbb{R}^2: \sqrt{(x_1-x_0^1)^2+(x_2-x_0^2)^2}<r\}$ 
+    \end{center}
+\textbf{51. Come si definisce un disco aperto di centro l'origine e raggio 1 in $\mathbb{R}^2$ se si considerano {\color{red} la distanza euclidea e la distanza del tassista?}}
+
+\textbf{Caso della distanza del tassista}
+
+Sia uno spazio metrico $(\mathbb{R}^2, d_1)$ e siano $\mathbf{x}_0 = \mathbf{0}$ e $r = 1$ 
+    \begin{center}
+        $B(\mathbf{0}, 1) = \{ \mathbf{x} \in \mathbb{R}^2: d(\mathbf{0}, \mathbf{x})<1   \} =$\\ \vspace{0.5em}$= \ x_{1,2}\in \mathbb{R}^2: |x_1-0|+|x_2-0|<1\}$ 
+    \end{center}
+    
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.8]
+
+    % Assi
+    \draw[->, thick] (-5,0) -- (5,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$y$};
+    
+    % Tick marks
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+        \draw (\x,0.1) -- (\x,-0.1) node[below, font=\small] {$\x$};
+    \foreach \y in {-3,-2,-1,1,2,3}
+        \draw (0.1,\y) -- (-0.1,\y) node[left, font=\small] {$\y$};
+    
+    % Rombo (palla con distanza Manhattan)
+    \fill[red!70, opacity=0.7] (0,1) -- (1,0) -- (0,-1) -- (-1,0) -- cycle;
+    
+\end{tikzpicture}
+\label{fig:ball_manhattan}
+\end{figure}
+
+Viene detta distanza del tassista (o distanza di Manhattan), ovvero con $||\mathbf{x}||_1=1$, in cui si sommano i valori assoluti di tutte coordinate.\\
+
+\textbf{Caso della distanza euclidea}
+
+Sia uno spazio metrico $(\mathbb{R}^2, d)$ e siano $\mathbf{x}_0 = \mathbf{0}$ e $r = 1$ 
+    \begin{center}
+        $B(\mathbf{0}, 1) = \{ \mathbf{x} \in \mathbb{R}^2: d(\mathbf{0}, \mathbf{x})<1   \} =$\\ \vspace{0.5em}$= \{ \mathbf{x}_{1,2}\in \mathbb{R}^2: \sqrt{(x_1-0)^2+(x_2-0)^2}<1\}$ 
+    \end{center}
+La distanza euclidea permette di definire una "linea retta" tra due punti, applicando il teorema di pitagora.
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=0.8]
+
+    % Assi
+    \draw[->, thick] (-5,0) -- (5,0) node[right] {$x$};
+    \draw[->, thick] (0,-4) -- (0,4) node[above] {$y$};
+    
+    % Tick marks
+    \foreach \x in {-4,-3,-2,-1,1,2,3,4}
+        \draw (\x,0.1) -- (\x,-0.1) node[below, font=\small] {$\x$};
+    \foreach \y in {-3,-2,-1,1,2,3}
+        \draw (0.1,\y) -- (-0.1,\y) node[left, font=\small] {$\y$};
+    
+    % Cerchio (palla)
+    \fill[red!70, opacity=0.7] (0,0) circle (1cm);
+    
+\end{tikzpicture}
+\label{fig:ball_euclidean}
+\end{figure}
+
+
+\textbf{52. Quando diciamo che un insieme è {\color{red}limitato}?}
+
+Grazie al concetto di intorno sferico si definisce meglio la proprietà della limitatezza: sia $A\subset \mathbb{R}^n$ e sia lo spazio metrico $(\mathbb{R}^n, d)$, A si dice limitato se esiste un intorno sferico \textit{aperto} in cui A è contenuto nell'intorno sferico.
+\begin{center}
+    Se $\exists r>0$ e $\mathbf{x}_0 \in \mathbb{R}^n$ tale che $A \subset B(\mathbf{x}_0,r)$
+\end{center}
+
+\textbf{53. Grazie alla definizione di intorno sferico posso fornire una {\color{red}definizione alternativa di successione convergente}?}
+
+\begin{definizione}[Successione convergente con Intorno Sferico] Sia una successione $\{x_n\} \subset \mathbb{R}^n$ con $\mathbf{x}_n = (\mathbf{x}_n^1,...,\mathbf{x}_n^n)$ che converge ad un vettore $\mathbf{x} = (\mathbf{x}^1,...,\mathbf{x}^n) \in \mathbb{R}^n$, allora $\forall \epsilon > 0$ $\exists n_\epsilon \in \mathbb{N}$ tale che $\mathbf{x}_n \in B(\mathbf{x}_0, \epsilon)$.
+\end{definizione}
+
+\subsection{Classificazione topologica degli insiemi}
+\textbf{54. Qual è la definizione di {\color{red}punto interno, esterno, di frontiera}?}
+\begin{definizione}[Punto Interno] Sia $\mathbf{x}_0 \in X$ interno ad $A \subset X$ se $\mathbf{x}_0 \in A$ e esiste almeno un intorno sferico di $\mathbf{x}_0$ contenuto in $A$, ovvero $\exists r> 0$ tale che $B(\mathbf{x}_0,r)\subset A$.
+\end{definizione}
+
+L'insieme di punti interni di $A$ si scrive $\mathring{A}$.
+
+\begin{definizione}[Punto Esterno] Sia $\mathbf{x}_0 \not \in X$ esterno ad $A \subset X$ se esiste almeno un intorno sferico disgiunto da $A$, ovvero $\exists r> 0$ tale che $B(\mathbf{x}_0,r)\cap A = \emptyset$.
+\end{definizione}
+
+
+\begin{definizione}[Punto di Frontiera]$ \mathbf{x}_0$ è un punto di frontiera di $A (\mathbf{x}_0 \in \delta A)$ se ogni intorno di $\mathbf{x}_0$  contiene sia punti interni sia punti esterni di A, ossia $\mathbf{x}_0 \in A$ se $\exists r>0: B(\mathbf{x}_0. r) \cap A \cap A^c \not = \emptyset$ con $A^c$ l'insieme complementare di $A$ tale che $\{\mathbf{x} \in \mathbb{R}^n: \mathbf{x} \not \in A\}$.
+\end{definizione}
+
+\begin{figure}[H]
+\centering
+\begin{tikzpicture}[scale=1]
+    
+    % Insieme A (forma irregolare)
+    \draw[fill=blue!20, draw=blue!60, thick] 
+        plot[smooth cycle, tension=0.7] coordinates {
+        (-2,0) (-1.5,1.5) (0,2) (1.5,1.8) (3,1) (3.5,0) (3,-1) (2,-1.8) (0.5,-2) (-1,-1.5)
+    };
+    
+    % Etichetta insieme A
+    \node[blue!70, font=\Large\bfseries] at (2.8,1.5) {$A$};
+    
+    % --- PUNTO INTERNO ---
+    \fill[green!60!black] (1,0.3) circle (2.5pt);
+    \node[green!60!black, font=\bfseries] at (1,0.55) {$\mathbf{x}_1$};
+    
+    % Intorno interno
+    \draw[green!60!black, thick] (1,0.3) circle (0.6cm);
+    \draw[green!60!black, ->] (1,0.3) -- (1.6,0.3);
+    \node[green!60!black, font=\small] at (1.3,0.1) {$r_1$};
+    
+    % Etichetta
+    \node[green!60!black, font=\small, align=center] at (1,-1) {Punto\\Interno};
+    
+   % --- PUNTO DI FRONTIERA ---
+    \fill[orange!80!red] (3.5,0) circle (2.5pt);
+    \node[orange!80!red, font=\bfseries] at (3.5,0.35) {$\mathbf{x}_2$};
+    
+    % Intorno di frontiera (metà dentro, metà fuori)
+    \draw[orange!80!red, thick] (3.5,0) circle (0.6cm);
+    \draw[orange!80!red, ->] (3.5,0) -- (4.1,0);
+    \node[orange!80!red, font=\small] at (3.8,-0.25) {$r_2$};
+    
+    % Etichetta
+    \node[orange!80!red, font=\small, align=center] at (4.0,-1) {Punto di\\Frontiera};
+    
+    % --- PUNTO ESTERNO ---
+    \fill[red] (5.5,0.5) circle (2.5pt);
+    \node[red, font=\bfseries] at (5.5,0.9) {$\mathbf{x}_3$};
+    
+    % Intorno esterno (completamente fuori)
+    \draw[red, thick] (5.5,0.5) circle (0.6cm);
+    \draw[red, ->] (5.5,0.5) -- (6.1,0.5);
+    \node[red, font=\small] at (5.8,0.3) {$r_3$};
+    
+    % Etichetta
+    \node[red, font=\small, align=center] at (5.5,-0.5) {Punto\\Esterno};
+    
+\end{tikzpicture}
+\label{fig:punti_classificazione}
+\end{figure}
+
+\newpage
+\textbf{55. Cosa si intende per {\color{red}insieme aperto e chiuso}?}
+
+\begin{definizione}[Insieme Aperto] Sia $A \subset X$ se $A = \emptyset$ o se ogni suo punto è interno ad A, ossia $A = \mathring{A}$.
+
+Formalmente, sia $(X,d)$ uno spazio metrico e sia un sottoinsieme $A \subset X$ si dice \emph{aperto} se per ogni $\mathbf{x} \in A$ esiste un raggio $r>0$ tale che
+\[
+B(\mathbf{x},r) \subseteq A.
+\]
+\end{definizione}
+
+\begin{definizione}[Insieme Chiuso] Un insieme si dice chiuso e contiene tutti i suoi punti di frontiera, ovvero $\delta C \subset C $.
+
+Formalmente, sia $(X,d)$ uno spazio metrico sia un sottoinsieme $C \subseteq X$ si dice \emph{chiuso} se il suo complementare $X \setminus C$ è un insieme aperto, cioè se per ogni $\mathbf{x} \in X \setminus C$ esiste un raggio $r>0$ tale che
+\[
+B(\mathbf{x},r) \subseteq X \setminus C.
+\]
+\end{definizione}
+
+$\emptyset$ e $\mathbb{R}^n$ sono gli unici insiemi aperti e chiusi.\\
+
+\textbf{56. Come si definisce {\color{red}un punto di accumulazione}?}
+\begin{definizione}[Punto di accumulazione] Sia $A \subseteq \mathbb{R}^n$ e sia $\mathbf{x}_0 \in \mathbb{R}^n$ punto di accumulazione per $A$ se $\forall r> 0$ abbiamo $B(\mathbf{x}_0,r) \cap (A-\{\mathbf{x}_0\} ) \not = \emptyset$.
+\end{definizione}
+Preso un intorno sferico, anche piccolissimo, contiene almeno un punto $\mathbf{x}$ di $A$ diverso dal punto di accumulazione $\mathbf{x_0}$
+\begin{itemize}
+    \item Sia $A$ aperto, tutti i punti in $\mathring{A}$ sono punti di accumulazione per A
+    \item Punti di frontiera $\delta A$ possono essere punti di accumulazione per A
+\end{itemize}
+
+Ogni punto di frontiera che \textit{non} è punto di accumulazione viene detto punto isolato.
+
+\textbf{57. {\color{red}Perché} $x_0$ è {\color{red}punto di accumulazione} per A se e solo se è il{\color{red}limite di una successione di elementi} di A tutti diversi da $x_0$?}
+
+\begin{definizione}[Caratterizzazione sequenziale dei punti di accumulazione]
+Sia $(X,d)$ uno spazio metrico e sia $A \subseteq X$.
+Un punto $\mathbf{x}_0 \in X$ è punto di accumulazione per $A$ se e solo se
+esiste una successione ${\mathbf{x}_n} \subseteq A \setminus \{x_0\}$
+tale che
+\[
+\lim_{n \to \infty} \mathbf{x}_n = \mathbf{x}_0 \text{ con } n\in\mathbb{N}
+\]
+\end{definizione}
+Un punto è di accumulazione per un insieme se e solo se l’insieme contiene una successione di punti distinti che si avvicinano indefinitamente a esso.\\
+
+\textbf{58. Cosa si intende per {\color{red}dominio come chiusura di un aperto}?}
+\subsubsection{Chiusura di un insieme}
+Sia $A \subseteq \mathbb{R}^n$ la chiusura di A è $\overline{A}$ ed è data dall'unione di $A$ e tutti i suoi punti di accumulazione.
+\begin{itemize}
+    \item $\overline{A}$ è chiuso, perché è l'intersezione di tutti gli insiemi chiusi di $A$
+    \item E' il più piccolo insieme di chiuso di A, ovvero $\overline{A} \subseteq A$ e se $A = \overline{A}$ allora $A$ è chiuso 
+\end{itemize}
+
+\begin{definizione}[Dominio in $\mathbb{R}^n$] Sia $A$ un insieme aperto (e connesso), il dominio $D$ è la chiusura di $A$, ovvero $D = \overline{A} = A \cup \delta A$.
+\end{definizione}
+
+Una sfera chiusa in $\mathbb{R}^n$ è un dominio perché è proprio la chiusura di un aperto. 
+
+Infatti presa un intorno sferico $B(\mathbf{x_0}, r) = \{ \mathbf{x} \in \mathbb{R}^n: ||\mathbf{x}-\mathbf{x_0}|| \leq r \} $  abbiamo che l'insieme di punti interni $\mathring{A}=\{ \mathbf{x} \in \mathbb{R}^n: ||\mathbf{x}-\mathbf{x_0}||<r \} $ è aperto e la frontiera $\delta A =\{ \mathbf{x} \in \mathbb{R}^n : ||\mathbf{x}-\mathbf{x_0}||=r\} $ è la sfera, di conseguenza la sfera è l'unione di A con la sua frontiera ($\overline{B} = \mathring{A} \cup \delta A$).\\
+
+Una sfera e un punto isolato non formano un dominio perché si contraddice la definizione di dominio che richiede che l'insieme $A$ aperto sia anche \textbf{connesso}.
+Sia $A$ un insieme connesso se non esistono due insiemi $U, V \subset \mathbb{R}^n$ tali che 
+\begin{enumerate}
+    \item $A \subset U \cup V$
+    \item $A \cap U \neq \emptyset$ (U interseca A in modo non vuoto)
+    \item $A \cap V \neq \emptyset$ (V interseca A in modo non vuoto)
+    \item $A \cap U \cap V = \emptyset$ (U e V non si sovrappongono su A)
+\end{enumerate}
+In soldoni, non si può dividere A in due insiemi disgiunti, se esso è definito connesso.
+
+\end{document}
