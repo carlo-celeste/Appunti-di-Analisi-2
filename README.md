@@ -4,13 +4,13 @@ Sono gli appunti che ho scritto dopo aver seguito l'intero corso di Analisi 2. S
 ## 📥 Download
 Clicca qui per scaricare il PDF:
 
-[Equazioni Differenziali](./EDO.pdf)
+[Equazioni Differenziali](./PDF-di-Analisi-2/EDO.pdf)
 
-[Cenni di Algebra Lineare](./Topologia-Spazi-Metrici.pdf)
+[Cenni di Algebra Lineare](./PDF-di-Analisi-2/Topologia-Spazi-Metrici.pdf)
 
-[Calcolo Differenziale](./Calcolo-Differenziale.pdf)
+[Calcolo Differenziale](./PDF-di-Analisi-2/Calcolo-Differenziale.pdf)
 
-[Approfondimento sui numeri complessi](./Numeri-complessi.pdf)
+[Approfondimento sui numeri complessi](./PDF-di-Analisi-2/Numeri-complessi.pdf)
 
 
 ## 📄 Codice Sorgente
