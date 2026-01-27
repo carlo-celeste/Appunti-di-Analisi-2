@@ -4,12 +4,14 @@ Sono gli appunti che ho scritto dopo aver seguito l'intero corso di Analisi 2. S
 ## 📥 Download
 Clicca qui per scaricare il PDF:
 
-[Equazioni Differenziali](./eqDiff.pdf)
+[Equazioni Differenziali](./EDO.pdf)
 
-[Cenni di Algebra Lineare](./spazioVett.pdf)
+[Cenni di Algebra Lineare](./Topologia-Spazi-Metrici.pdf)
 
-[Calcolo Differenziale](./calcoloDiff.pdf)
+[Calcolo Differenziale](./Calcolo-Differenziale.pdf)
+
+[Approfondimento sui numeri complessi](./Numeri-complessi.pdf)
 
 
 ## 📄 Codice Sorgente
-Se volete vedere come ho scritto le formule o volete contribuire, trovate il codice ".tex" nella lista dei file qui sopra.
+Se vuoi vedere come ho scritto le formule, le dimostrazioni o le definizioni in generale o vuoi contribuire, trovi il codice ".tex" nel file TEX.
