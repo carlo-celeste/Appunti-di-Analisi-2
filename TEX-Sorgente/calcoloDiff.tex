@@ -761,6 +761,9 @@ f(x) = f(x_0) + f'(x_0)(x - x_0) + o(x - x_0)
 
 dove il termine $o(x - x_0)$ indica una quantità che tende a zero più velocemente di $x - x_0$.
 
+Se dividiamo entrambi i membri per $x - x_0$ e prendiamo il limite per $x \to x_0$, otteniamo:
+\[\lim_{x \to x_0} \frac{f(x) - f(x_0)}{x - x_0} = f'(x_0)\]
+
 Questo significa che:
 \[
 f(x) - \text{retta tangente} = o(x - x_0)
@@ -768,61 +771,70 @@ f(x) - \text{retta tangente} = o(x - x_0)
 
 e quindi, avvicinandosi a $x_0$, la funzione e la sua approssimazione lineare diventano sempre più indistinguibili, indipendentemente da quanto piccolo sia l'intorno scelto.
 
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.6\linewidth]{../Immagini/DiffernziabileUno.png}
+\end{figure}
+
+
 \item \textbf{Analisi 2 (Caso multivariato)}:
 
-A differenza del caso unidimensionale, in più variabili i concetti di derivabilità (parziale) e differenziabilità si separano nettamente. La semplice esistenza delle derivate parziali (lungo gli assi) è una condizione debole: garantisce l'esistenza delle tangenti solo lungo direzioni specifiche, ma non implica la continuità né l'esistenza di un piano tangente coerente.
+A differenza del caso unidimensionale, in più variabili ($f: \mathbb{R}^n \to \mathbb{R}$) i concetti di \textbf{derivabilità} (esistenza delle derivate parziali) e \textbf{differenziabilità} si separano nettamente. 
 
-Se $f(\mathbf{x})$ è differenziabile in $\mathbf{x}_0 = (x_0, y_0)$, allora:
-\[
-f(\mathbf{x}) = f(\mathbf{x}_0) + \nabla f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0) + o(\|\mathbf{x} - \mathbf{x}_0\|)
-\]
-Esplicitamente in due variabili:
-\[
-f(x,y) = f(x_0, y_0) + f_x(x_0, y_0)(x - x_0) + f_y(x_0, y_0)(y - y_0) + o\!\left(\sqrt{(x - x_0)^2 + (y - y_0)^2}\right)
-\]
-Il termine di resto $o(\|\mathbf{x} - \mathbf{x}_0\|)$ è più piccolo della distanza euclidea tra i punti, ovvero:
-\[
-\lim_{\mathbf{x} \to \mathbf{x}_0} \frac{f(\mathbf{x}) - f(\mathbf{x}_0) - \nabla f(\mathbf{x}_0) \cdot (\mathbf{x} - \mathbf{x}_0)}{\|\mathbf{x} - \mathbf{x}_0\|} = 0
-\]
-
-Le derivate parziali forniscono informazioni solo lungo $n$ direzioni privilegiate (gli assi coordinati). Senza differenziabilità, non c'è garanzia che queste informazioni si ``assemblino'' in un piano tangente coerente: la superficie potrebbe avere comportamenti irregolari nelle direzioni oblique, con una ``raggiera'' di pendenze che non giacciono su un unico piano ben definito.
-
-La differenziabilità richiede che la funzione possa essere \textit{realmente approssimata} dal piano tangente in tutte le direzioni, non solo lungo gli assi.
-
-Consideriamo ad esempio la funzione:
-\[
-f(x,y) = \sqrt{x^2 + y^2}
-\]
-che rappresenta un cono con vertice nell'origine. Nel punto $(0,0)$:
-\begin{itemize}
-    \item Le derivate parziali esistono: $f_x(0,0) = f_y(0,0) = 0$
-    \item Tuttavia la funzione \textbf{non è differenziabile} in $(0,0)$ perché mantiene la forma ``a punta'' del cono in ogni intorno del vertice: non può essere approssimata da un piano tangente, qualunque sia la dimensione dell'intorno considerato.
-\end{itemize}
+La semplice esistenza delle derivate parziali è una condizione debole: garantisce l'esistenza delle rette tangenti solo lungo direzioni specifiche (gli assi), ma non implica la continuità della funzione né l'esistenza di un piano tangente coerente.
 
 Una funzione $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ è \textit{differenziabile} in $\mathbf{x}_0$ se l'incremento della funzione può essere approssimato linearmente in modo globale.
+
 Esiste cioè un'applicazione lineare $L: \mathbb{R}^n \to \mathbb{R}$ tale che:
 \[
-    f(\mathbf{x}_0 + \mathbf{h}) = f(\mathbf{x}_0) + L(\mathbf{h}) + o(\|\mathbf{h}\|) \quad \text{per } \mathbf{h} \to \mathbf{0}
+f(\mathbf{x}_0 + \mathbf{h}) = f(\mathbf{x}_0) + L(\mathbf{h}) + o(\|\mathbf{h}\|) \quad \text{per } \mathbf{h} \to \mathbf{0}
 \]
 Se $f$ è differenziabile, l'applicazione lineare $L$ è univocamente determinata dal gradiente: $L(\mathbf{h}) = \nabla f(\mathbf{x}_0) \cdot \mathbf{h}$.
 
-In termini geometrici, il valore della funzione in un punto vicino $\mathbf{x} = \mathbf{x}_0 + \mathbf{h}$ è composto da tre parti:
-\begin{itemize}
-    \item \textbf{Il punto di partenza:} $f(\mathbf{x}_0)$, la quota base.
-    \item \textbf{La variazione lineare (Piano Tangente):} $L(\mathbf{h}) = \sum_{i=1}^n \frac{\partial f}{\partial x_i}(\mathbf{x}_0) h_i$. Questa parte rappresenta lo spostamento che avremmo se ci muovessimo sul piano tangente invece che sulla superficie curva.
-    \item \textbf{L'errore di approssimazione:} $o(\|\mathbf{h}\|)$. È lo scarto tra la superficie reale e il piano tangente. La differenziabilità impone che questo errore diventi trascurabile molto più velocemente della distanza dal punto di contatto.
-\end{itemize}
-
-\textbf{Condizione sufficiente per la differenziabilità (Teorema del Differenziale Totale):}
-
-Se tutte le derivate parziali di $f$ esistono e sono continue in un intorno di $\mathbf{x}_0$, allora $f$ è differenziabile in $\mathbf{x}_0$. Questa è una condizione sufficiente (ma non necessaria) molto utile nella pratica.
-
-Grazie alla differenziabilità, possiamo usare il differenziale per stimare il valore della funzione in punti vicini a $\mathbf{x}_0$ senza dover ricalcolare la funzione complessa. Linearizzando $\mathbf{x} = \mathbf{x}_0 + \mathbf{h}$ si ottiene:
+Esplicitamente in due variabili, ponendo $\mathbf{h} = (x-x_0, y-y_0)$, la formula diventa:
 \[
-f(\mathbf{x}) \approx f(\mathbf{x}_0) + \nabla f(\mathbf{x}_0) \cdot \mathbf{h}
+f(x,y) = f(x_0, y_0) + f_x(x_0, y_0)(x - x_0) + f_y(x_0, y_0)(y - y_0) + o\!\left(\sqrt{(x - x_0)^2 + (y - y_0)^2}\right)
 \]
+
+La condizione di differenziabilità richiede che il termine di errore tenda a zero più velocemente della distanza euclidea:
+\[
+\lim_{\mathbf{h} \to \mathbf{0}} \frac{f(\mathbf{x}_0 + \mathbf{h}) - f(\mathbf{x}_0) - \nabla f(\mathbf{x}_0) \cdot \mathbf{h}}{\|\mathbf{h}\|} = 0
+\]
+
+Geometricamente, il valore della funzione vicino a $\mathbf{x}_0$ è composto da tre parti:
+\begin{itemize}
+    \item Quota base: $f(\mathbf{x}_0)$.
+    \item Variazione sul Piano Tangente:$\nabla f(\mathbf{x}_0) \cdot \mathbf{h}$.
+    \item Errore di approssimazione: $o(\|\mathbf{h}\|)$, che deve essere trascurabile.
 \end{itemize}
-\newpage
+
+Le derivate parziali forniscono informazioni solo lungo $n$ direzioni privilegiate ("a croce"). Senza differenziabilità, queste informazioni locali potrebbero non "assemblarsi" in un piano. Potremmo avere una "raggiera" di rette tangenti che non sono complanari.
+
+\textbf{Esempio fondamentale (Derivabile ma non Differenziabile):}
+
+Consideriamo la funzione
+\[
+f(x,y) = \begin{cases} 
+\frac{x^2 y}{x^2 + y^2} & \text{se } (x,y) \neq (0,0) \\
+0 & \text{se } (x,y) = (0,0)
+\end{cases}
+\]
+Nel punto $(0,0)$:
+\begin{enumerate}
+    \item \textbf{Le derivate parziali esistono e sono nulle}: infatti, lungo gli assi $x=0$ e $y=0$ la funzione è identicamente nulla, quindi $f_x(0,0) = 0$ e $f_y(0,0) = 0$. Il candidato piano tangente sarebbe il piano $z=0$;
+    \item \textbf{La funzione non è differenziabile}: se proviamo ad avvicinarci all'origine lungo la bisettrice $y=x$, otteniamo $f(x,x) = x/2$. La pendenza è $1/2$, mentre il gradiente nullo prevedeva pendenza $0$. L'approssimazione lineare fallisce.
+\end{enumerate}
+
+Questo dimostra che possiamo avere le derivate parziali (derivabilità) senza avere un piano tangente che approssima bene la funzione in tutte le direzioni (differenziabilità).
+Per evitare di verificare il limite ogni volta, si usa il seguente teorema operativo:
+
+\begin{quote}
+Se tutte le derivate parziali di $f$ esistono e sono \textbf{continue} in un intorno di $\mathbf{x}_0$ (ovvero $f \in C^1$), allora $f$ è differenziabile in $\mathbf{x}_0$.
+\end{quote}
+
+La continuità delle derivate "stabiliza" le pendenze, impedendo comportamenti patologici e garantendo l'esistenza del piano tangente.
+
+\end{itemize}
 
 \textbf{87. Quindi, come si definisce {\color{red}una funzione differenziabile}?}
  \begin{definizione}[Differenziabilità] Una funzione $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ è differenziabile in $\mathbf{x}_0 \in A$ se e solo se: 
@@ -840,7 +852,6 @@ Affermare che il limite è 0 significa che il numeratore (l'errore dell'approssi
 f(\mathbf{x}_0 + \mathbf{h}) - f(\mathbf{x}_0) - \nabla f(\mathbf{x}_0)\cdot \mathbf{h} = o(\|\mathbf{h}\|)
 \]
 
-\newpage
 \textbf{88. Perché la differenziabilità in un punto è legata all'{\color{red}esistenza del piano tangente} al grafico della funzione nel punto?}
 
 Geometricamente, dire che una funzione $f: \mathbb{R}^2 \rightarrow\mathbb{R}$ è differenziabile in un punto $P_0=(x_0,y_0)$ equivale a dire che il grafico della funzione ammetta un iperpiano tangente \textbf{non verticale} in $P_0=(\mathbf{x}_0, f(\mathbf{x}_0))$.
@@ -879,8 +890,12 @@ Mentre l'approssimazione della funzione (formula di Taylor al primo ordine) è:
 Allo stesso modo, in $\mathbb{R}^2$, il piano tangente rappresenta la parte lineare dello sviluppo della funzione.\\
 
 \textbf{90. Qual è il {\color{red}significato geometrico del differenziale}?}
+\begin{figure}[H] 
+    \centering
+    \includegraphics[width=0.8\linewidth]{../Immagini/Differenziale.jpeg}
+\end{figure}
 
-Dato un punto base $\mathbf{x}_0$ e un vettore spostamento $\mathbf{h}$:
+Nell'analisi multivariata, dato un punto base $\mathbf{x}_0$ e un vettore spostamento $\mathbf{h}$:
 
 \begin{itemize}
     \item \textbf{L'incremento vero ($\Delta f$):} 
@@ -901,11 +916,11 @@ Per spostamenti $\mathbf{h}$ molto piccoli (in un intorno di $\mathbf{x}_0$), l'
 \[
     \Delta f \approx df
 \]
-Più formalmente, la differenza $\Delta f - df$ è un infinitesimo di ordine superiore rispetto alla norma dello spostamento ($o(\|\mathbf{h}\|)$).\\
-
+Più formalmente, la differenza $\Delta f - df$ è un infinitesimo di ordine superiore rispetto alla norma dello spostamento ($o(\|\mathbf{h}\|)$).
+\newpage
 \textbf{91. Se è {\color{red}differenziabile} allora è {\color{red}continua}?}
 
-Sia $f: A \subseteq \mathbb{R}^n \rightarrow\mathbb{R}$ differenziabile in un punto $\mathbf{x}_0\in A$ allora è continua in $\mathbf{x}_0$.\\
+Sia $f: A \subseteq \mathbb{R}^n \rightarrow\mathbb{R}$ differenziabile in un punto $\mathbf{x}_0\in A$ allora è continua in $\mathbf{x}_0$.
 
 \textbf{\color{thmcolor}DIMOSTRAZIONE}
 
@@ -955,7 +970,7 @@ Mettendo tutto insieme otteniamo:
 Poiché il limite coincide con il valore della funzione nel punto, $f$ è continua in $\mathbf{x}_0$.
 
 \hfill{\color{thmcolor}$\square$}
- \newpage
+
 \textbf{92. Enunciare e dimostrare {\color{red}il teorema del differenziale}.}
 \begin{teorema}[Teorema del differenziale] Sia $f: A \subseteq \mathbb{R}^n \rightarrow\mathbb{R}$ con $A$ aperto e si suppone che $f$ sia derivabile su tutto $A$ tale che
 \[
