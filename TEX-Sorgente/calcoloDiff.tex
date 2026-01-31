@@ -858,8 +858,6 @@ Geometricamente, dire che una funzione $f: \mathbb{R}^2 \rightarrow\mathbb{R}$ �
 
 Non basta che il piano tocchi il punto (quello lo fanno infiniti piani). Significa che il piano è talmente "aderente" alla superficie curva che, se "zoommiamo" infinitamente sul punto $P_0$, la superficie curva del grafico diventa indistinguibile dal piano piatto. L'errore che commettiamo sostituendo la superficie con il piano tende a zero più velocemente della distanza dal punto.
 
-
-
 \begin{figure}[H] 
     \centering
     \includegraphics[width=0.6\linewidth]{../Immagini/IperpianoTangente.png}
@@ -1635,8 +1633,10 @@ F'(0) = \langle \nabla f(\mathbf{x}_0), \mathbf{v} \rangle = 0
 \subsection{Test dell'hessiana}
 \textbf{107. Come si studia {\color{red}la natura dei punti critici}?}
 
-Per le funzioni ad una variabile dopo aver supposto che un punto fosse critico e che la $f \in C^2$ si studiava il segno della derivata seconda.
-Nel caso di funzioni di più variabili lo studio viene fatto  con la matrice Hessiana.
+Per le funzioni ad una variabile, supposto che una funzione $f \in C^2$ e individuato un punto critico $x_0$ ($f'(x_0) = 0$) 
+la classificazione del punto si ottiene dallo studio della derivata seconda, governato dal termine quadratico dello svilluppo di Taylor al secondo ordine.
+
+Nel caso di funzioni di più variabili, l’analogo della derivata seconda è la matrice Hessiana.
 
 Sia $f: A \subseteq \mathbb{R}^2 \to \mathbb{R}$ con $A$ aperto e $f \in C^2(A)$, ossia esistono le 4 derivate seconde e sono continue.
 
@@ -1662,9 +1662,9 @@ Se $\det H = 0$, il test è inefficace e bisogna procedere con altri metodi.
 \subsection{Forme Quadratiche}
 \textbf{108. Come possiamo {\color{red}dimostrare} quanto detto sul {\color{red}test dell'hessiana}?}
 
-Quando sei in un punto critico, la parte lineare (il piano tangente) è piatta (zero). Quindi, per capire se si sale o scende, bisogna guardare il termine successivo, quello di secondo grado della formula di Taylor.
-
+In un punto critico la parte lineare dello sviluppo di Taylor si annulla (il piano tangente è piatto). Per studiare il comportamento locale della funzione è quindi necessario analizzare il termine successivo, quello di secondo ordine.
 Quindi, per capire l'origine del test precedente, analizziamo la formula di Taylor al secondo ordine. 
+
 Il segno della variazione locale della funzione dipende dal termine di secondo grado:
 \[
 f(\mathbf{x}_0 + \mathbf{h}) - f(\mathbf{x}_0) \approx \frac{1}{2} \underbrace{\langle Hf(\mathbf{x}_0)\mathbf{h}, \mathbf{h} \rangle}_{q(\mathbf{h})}
@@ -1674,7 +1674,7 @@ Il termine $q(\mathbf{h})$ è una forma quadratica.
 \vspace{0.3em}
 \textbf{109. Cos'è {\color{red} una forma quadratica}?}
 \begin{definizione}[Forma Quadratica] Una forma quadratica in $\mathbf{h} \in \mathbb{R}^n$ è un polinomio omogeneo di secondo grado nelle variabili $h_1, \dots, h_n$.
-Ad ogni forma quadratica $q(\mathbf{h})$ è associata una matrice simmetrica $A$ tale che:
+Ad essa $q(\mathbf{h})$ è associata una matrice simmetrica $A$ tale che:
 \[
 q(\mathbf{h}) = \langle A\mathbf{h}, \mathbf{h} \rangle = \sum_{i,j=1}^n a_{ij} h_i h_j
 \]
@@ -1694,39 +1694,39 @@ A =
 Notare come il coefficiente $10$ di $h_1h_2$ sia stato diviso equamente tra $a_{12}$ e $a_{21}$.
 
 \vspace{0.3em}
-\textbf{110. Studiando la natura dei punti critci, come si classifica una {\color{red}forma quadratica} in base alla {\color{red}matrice associata}?}
+\textbf{110. Come si classifica una {\color{red}forma quadratica}?}
 
 Per determinare la natura del punto critico, dobbiamo studiare il segno di $q(\mathbf{h})$ per $\mathbf{h} \neq \mathbf{0}$.
 
-Sia $A$ la matrice Hessiana associata. Essendo simmetrica reale, possiede $n$ autovalori reali $\lambda_1, \dots, \lambda_n$.
+Sia $A$ la matrice simmetrica reale, essa ammette $n$ autovalori reali $\lambda_1, \dots, \lambda_n$.
 
 \begin{itemize}
-    \item $A$ è definita positiva: $q(\mathbf{h}) > 0, \forall \mathbf{h} \neq \mathbf{0}$.
+    \item $A$ è \underline{definita positiva}: $q(\mathbf{h}) > 0, \forall \mathbf{h} \neq \mathbf{0}$.
     \begin{itemize}
-        \item Condizione sugli autovalori: $\lambda_i > 0$ per tutti gli $i$;
-        \item Conseguenza: Punto di minimo.
+        \item $\lambda_i > 0$ per tutti gli $i$;
+        \item Punto di minimo.
     \end{itemize}
     
-    \item $A$ è definita negativa: $q(\mathbf{h}) < 0, \forall \mathbf{h} \neq \mathbf{0}$.
+    \item $A$ è \underline{definita negativa}: $q(\mathbf{h}) < 0, \forall \mathbf{h} \neq \mathbf{0}$.
     \begin{itemize}
-        \item Condizione sugli autovalori: $\lambda_i < 0$ per tutti gli $i$;
-        \item Conseguenza: Punto di massimo.
+        \item $\lambda_i < 0$ per tutti gli $i$;
+        \item Punto di massimo.
     \end{itemize}
     
-    \item $A$ è indefinita: Esistono $\mathbf{h}_1, \mathbf{h}_2$ tali che $q(\mathbf{h}_1) > 0$ e $q(\mathbf{h}_2) < 0$.
+    \item $A$ è \underline{indefinita}:  $q(\mathbf{h})$ assume sia valori positivi sia negativi..
     \begin{itemize}
-        \item Condizione sugli autovalori: Esistono autovalori discordi (almeno un $\lambda > 0$ e un $\lambda < 0$).
-        \item Conseguenza: Punto di sella.
+        \item Esistono autovalori discordi (almeno un $\lambda > 0$ e un $\lambda < 0$).
+        \item Punto di sella.
     \end{itemize}
 \end{itemize}
 
 \textbf{111. Come si collegano {\color{red}determinante e traccia} della matrice agli {\color{red}autovalori} per il {\color{red}test dell'hessiana}?}
 
-Nel caso specifico di 2 variabili, si può dire che gli autovalori $\lambda_1, \lambda_2$ sono le radici del polinomio caratteristico
+Nel caso di 2 variabili, si può dire che gli autovalori $\lambda_1, \lambda_2$ sono le radici del polinomio caratteristico
 \[
- \det(A - \lambda I) = 0 \implies \lambda^2 - \text{tr}(A)\lambda + \det(A) = 0
+ \lambda^2 - \text{tr}(A)\lambda + \det(A) = 0
 \]
-E valgono le relazioni fondamentali:
+E valgono le relazioni 
 \[ \det(A) = \lambda_1 \cdot \lambda_2 \quad ; \quad \text{tr}(A) = \lambda_1 + \lambda_2 \]
 
 Quindi la matrice simemtrica $A$ di dimensione $2 \times 2$ associata alla forma quadratica $q(h,k)$ è:
@@ -1747,53 +1747,112 @@ Questo ci permette di spiegare il test dell'hessiana in modo più intuitivo:
     \item Se $\det A < 0$, ovvero il prodotto $\lambda_1 \lambda_2$ è negativo $\implies$ autovalori discordi $\to$ sella.
 \end{enumerate}
 
-\textbf{112. Perché si usano {\color{red}le forme quadratiche per spiegare il test dell'hessiana}?}
+\textbf{112. Perché si usano {\color{red}le forme quadratiche}?}
 
-Possiamo riassumere il ragionamento in tre passaggi chiave che trasformano un problema di geometria in uno di algebra.
+Il problema geometrico della classificazione dei punti critici viene ricondotto 
+a un problema algebrico: lo studio del segno della forma quadratica associata al termine di secondo ordine dello sviluppo di Taylor.
+
+Possiamo riassumere il ragionamento in tre passaggi chiave:
 
 \begin{enumerate}
-    \item \textbf{Il problema della "pianura" (Fermat non basta):} 
-    Quando siamo in un punto critico ($\nabla f = 0$), il piano tangente è orizzontale. La parte lineare della funzione si annulla. Per capire se siamo su una cima, in una buca o su una sella, dobbiamo guardare il "termine successivo" dello sviluppo di Taylor: il termine di secondo grado (quadratico).
+    \item \textbf{Fermat non basta} 
     
-    \item \textbf{Gli autovalori sono le "curvature vere":} 
+    Quando siamo in un punto critico ($\nabla f = 0$), il piano tangente è orizzontale.
+     La parte lineare della funzione si annulla. Per capire se siamo su una cima, in una buca o su una sella, dobbiamo guardare il "termine successivo" dello sviluppo di Taylor: il termine di secondo grado (quadratico).
+    
+    \item \textbf{Gli autovalori sono le "curvature vere"}
+     
     La matrice Hessiana descrive la curvatura, ma spesso contiene "termini misti" ($f_{xy}$) che creano confusione perché dipendono dal sistema di coordinate scelto ($x, y$).
-    Gli \textbf{autovalori} ($\lambda$) rappresentano le curvature lungo le \textbf{direzioni principali}, ovvero quelle direzioni speciali in cui la superficie curva senza torsioni.
+    Gli autovalori ($\lambda$) rappresentano le curvature lungo le \underline{direzioni principali}, ovvero quelle direzioni speciali in cui la superficie curva senza torsioni.
     \begin{itemize}
-        \item Un $\lambda$ positivo indica una curvatura verso l'alto (come una parabola $x^2$).
-        \item Un $\lambda$ negativo indica una curvatura verso il basso (come $-x^2$).
+        \item Un $\lambda$ positivo indica una curvatura verso l'alto (convessità).
+        \item Un $\lambda$ negativo indica una curvatura verso il basso (concavità).
     \end{itemize}
-    Se gli autovalori sono tutti positivi, la funzione curva verso l'alto in ogni direzione (scodella $\to$ minimo). Se sono discordi, in una direzione sale e nell'altra scende (sella).
 
-    \item \textbf{L'Equazione Caratteristica come "traduttore":}
-    Per trovare gli autovalori usiamo l'equazione caratteristica:
-    \[ \det(H - \lambda I) = 0 \]
-    In due variabili, questa equazione ci svela una scorciatoia fondamentale:
-    \[ \lambda_1 \cdot \lambda_2 = \det(H) \]
-    Questo spiega perché il \textbf{Test dell'Hessiana} funziona guardando solo il determinante:
+    \item \textbf{Hessiana vs Autovalori}
+    
+    A prima vista può sembrare strano: gli autovalori sono così importanti per classificare i punti critici, eppure quando scriviamo l'Hessiana
+        \[
+        H = \begin{bmatrix}
+        f_{xx} & f_{xy}\\
+        f_{xy} & f_{yy}
+        \end{bmatrix}
+        \]
+        non vediamo $\lambda_1$ e $\lambda_2$ da nessuna parte. 
+
+    La chiave è capire che l'Hessiana "vede" la geometria con gli occhiali delle coordinate (x,y) scelte. Le derivate seconde $f_{xx}, f_{xy}, f_{yy}$ descrivono come la funzione si curva lungo gli assi $x$ e $y$ e nelle direzioni miste. 
+    Ma queste direzioni sono arbitrarie: dipendono da come abbiamo orientato il nostro sistema di riferimento.
+    
+    Gli autovalori, invece, sono invarianti geometrici: non dipendono dal sistema di coordinate. 
+    Essi rappresentano le curvature lungo le direzioni principali del paraboloide ed è qui che entra in gioco il teorema spettrale ci dice che esiste
+    sempre una rotazione del sistema di coordinate (rappresentata da una matrice ortogonale Q) che allinea i nostri assi con le direzioni principali:
+    \[
+    Q^T H Q = \begin{bmatrix}
+    \lambda_1 & 0\\
+    0 & \lambda_2
+    \end{bmatrix} = D
+    \]
+    In questo nuovo sistema di coordinate (u,v) l'Hessiana diventa diagonale: i termini misti spariscono. La forma quadratica si semplifica a
+    \[
+    q(u,v) = \lambda_1 u^2 + \lambda_2 v^2
+    \]
+    Ora gli autovalori sono visibili: sono proprio i coefficienti sulla diagonale. In queste coordinate "speciali", la geometria diventa cristallina:
     \begin{itemize}
-        \item Se $\det H < 0$, il prodotto $\lambda_1 \lambda_2$ è negativo. L'unico modo per ottenere un meno è moltiplicare un numero positivo e uno negativo. Ergo: autovalori discordi $\implies$ \textbf{Sella}.
-        \item Se $\det H > 0$, il prodotto è positivo. Gli autovalori hanno lo stesso segno (concordi). Basta controllarne uno (tramite la traccia o $f_{xx}$) per capire se sono entrambi positivi (Minimo) o negativi (Massimo).
+    \item $\lambda_1 > 0, \lambda_2 > 0$ la parabola che sale in entrambe le direzioni $\implies$ minimo;
+    \item $\lambda_1 < 0, \lambda_2 < 0$ la parabola che scende in entrambe le direzioni $\implies$ massimo;
+    \item $\lambda_1 \cdot \lambda_2 < 0$ la parabola sale in una direzione e scende nell'altra $\implies$ sella
     \end{itemize}
 \end{enumerate}
+
 
 \subsection{Caso dubbio: il test dell'hessiana non funziona}
 \textbf{113. Cosa si fa quando {\color{red}il test dell'hessiana fallisce} ($\det H = 0$)?}
 
-Quando il determinante è nullo, la matrice Hessiana è "degenere" e non ci dà informazioni sufficienti sulla curvatura (la funzione è "troppo piatta" per l'approssimazione quadratica).
+Quando il determinante è nullo, la matrice Hessiana è "degenere" e 
+non ci dà informazioni sufficienti sulla curvatura (la funzione è "troppo piatta" per l'approssimazione quadratica). 
 
-In questo caso, si deve tornare alla definizione di estremo locale, studiando direttamente il segno della variazione della funzione in un intorno del punto critico $P_0=(x_0, y_0)$.
+Infatti, il metodo dell'Hessiana è inconcludente se abbiamo almeno un autovalore uguale a zero: 
+non possiamo capire in modo certo se quel punto è di massimo, di minimo o di sella, e dobbiamo quindi ricorrere a un metodo alternativo.
+
+Nell'analisi unidimensionale possiamo immaginare di voler classificare un punto critico $x_1$ di una funzione $f(x)$ sapendo solo che $f(x_1) = c$.
+Guardando il grafico sapremmo riconoscere immediatamente se $x_1$ è un massimo o un minimo.
+
+Senza accesso al grafico, possiamo \textit{traslare} verticalmente la funzione in modo che l'estremo si trovi esattamente sull'asse delle $x$, definiamo quindi
+\[
+\bar{f}(x) = f(x) - c
+\]
+
+Questa nuova funzione è identica a quella originale, ma "abbassata" (o "innalzata", se
+$c<0$) esattamente del valore $c$. In particolare:
+\[
+\bar{f}(x_1) = f(x_1) - c = 0
+\]
+Ora studiamo il segno di $\bar{f}$ in un intorno di $x_1$:
+\begin{itemize}
+    \item Se $\bar{f}(x) \le 0$ in un intorno di $x_1$, significa 
+    che dopo la traslazione tutti i valori della funzione vicino a $x_1$ sono negativi o nulli.
+    
+    Quindi $f(x) \le c$ in quell'intorno $\implies x_1$ è un \underline{punto di massimo}.
+    \item Se $\bar{f}(x) \ge 0$ in un intorno di $x_1$, significa che $f(x) \ge c$ in quell'intorno $\implies$ $x_1$ è un \underline{punto di minimo}.
+    \item Se $\bar{f}$ cambia segno, allora $x_1$ non è né un massimo né un minimo (caso che in una variabile è raro, ma in più variabili corrisponde alla sella).
+\end{itemize}
+
+Questo stesso ragionamento si applica alle funzioni di due variabili quando \underline{l'Hessiana è degenere}.
+In questo caso, si deve tornare alla definizione di estremo locale, 
+studiando direttamente il segno della variazione della funzione in un intorno del punto critico $P_0=(x_0, y_0)$
 
 Si definisce l'incremento:
 \[ \Delta f(x,y) = f(x,y) - f(x_0, y_0) \]
-Si studia il segno di $\Delta f$ in un intorno molto piccolo di $P_0$:
 
+Questa è esattamente l'analogo bidimensionale della funzione \(\bar{f}\) vista prima: stiamo "traslando" la superficie in modo che il punto critico si trovi a quota zero, e poi studiamo se la superficie nei dintorni è tutta sopra, tutta sotto, o a cavallo del piano \(z=0\).
+
+Si studia quindi il segno di \(\Delta f\) in un intorno sufficientemente piccolo di $P_0$:
 \begin{enumerate}
-    \item \textbf{Minimo Locale:} Se esiste un intorno in cui $\Delta f(x,y) \ge 0$ per ogni punto (ovvero la funzione assume sempre valori maggiori o uguali a $f(P_0)$);
-    
-    \item \textbf{Massimo Locale:} Se esiste un intorno in cui $\Delta f(x,y) \le 0$ per ogni punto;
-    
-    \item \textbf{Punto di Sella:} Se in \textit{qualsiasi} intorno di $P_0$ esistono sia punti in cui $\Delta f > 0$ sia punti in cui $\Delta f < 0$. 
-    Graficamente, studiando il segno sul piano $xy$, vedremo delle regioni positive e negative che convergono nel punto critico.
+    \item \textbf{Minimo Locale:} Se esiste un intorno in cui \(\Delta f(x,y) \ge 0\) per ogni punto (ovvero la funzione assume sempre valori maggiori o uguali a \(f(P_0)\));
+    \item \textbf{Massimo Locale:} Se esiste un intorno in cui \(\Delta f(x,y) \le 0\) per ogni punto (la superficie "traslata" è tutta sotto il piano \(z=0\));
+    \item \textbf{Punto di Sella:} Se in \textit{qualsiasi} intorno di $P_0$, per quanto piccolo, 
+    esistono sia punti in cui \(\Delta f > 0\) sia punti in cui \(\Delta f < 0\). Graficamente, studiando il segno sul piano $xy$, vedremo delle regioni positive e 
+    negative che si alternano e convergono tutte nel punto critico.
 \end{enumerate}
 
 
