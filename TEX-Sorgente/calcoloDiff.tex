@@ -1118,53 +1118,62 @@ Poiché il limite (la derivata direzionale) è unico, anche l'applicazione linea
 
 \textbf{95. Perché diciamo che il vettore {\color{red}gradiente} indica la direzione e il verso della {\color{red}massima pendenza} di una funzione multivariata in un punto?}
 
-Per comprendere questo fatto geometrico, usiamo la \textbf{regola della catena}.
-Consideriamo una curva regolare che passa per il punto $\mathbf{x}_0$:
+L'idea fondamentale è trasformare un problema in più variabili in un problema in una sola variabile, dove il concetto di pendenza è immediato.
+
+\vspace{0.6em}
+\textbf{Passo 1: Il punto e il movimento}
+
+Sia una funzione differenziabile $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ e sia $\mathbf{x}_0 \in A$ un punto fissato.
+
+Per parlare di pendenza dobbiamo chiarire come ci muoviamo a partire dal punto, allora consideriamo una curva regolare che passa per il punto $\mathbf{x}_0$:
 \[
-\gamma: [-1,1] \subset \mathbb{R} \to A \subseteq \mathbb{R}^n
+\gamma: [-\epsilon, \epsilon] \subset \mathbb{R} \to A \subseteq \mathbb{R}^n, \quad \gamma(0)=\mathbf{x}_0
 \]
-Tale che $\gamma(0)=\mathbf{x}_0$ e $\gamma'(0)=\mathbf{v}$ (dove $\mathbf{v}$ è il vettore direzione unitario, $\|\mathbf{v}\|=1$).
+La curva rappresenta un \textit{sentiero} nello spazio, definiamo pure il suo vettore velocità $\gamma'(0)=\mathbf{v}$, che indica la direzione iniziale del movimento.
+Visto che ci interessa sola la direzione (e non la velocità) scriviamo $\mathbf{v}$ come il vettore di direzione unitaria, $\|\mathbf{v}\|=1$.
+
+\vspace{0.6em}
+\textbf{Passo 2: Riduzione a una variabile}
 
 Definiamo la funzione composta (restrizione di $f$ alla curva):
 \[
 F(t) = (f \circ \gamma)(t) = f(\gamma(t))
 \]
-Questa funzione rappresenta la "quota" percorrendo la curva $\gamma$.
-Poiché $f$ è differenziabile, la derivata di $F$ in $t=0$ (la variazione di quota istantanea) è data dalla regola della catena:
-\[
-F'(0) = \nabla f(\mathbf{x}_0) \cdot \gamma'(0) = \nabla f(\mathbf{x}_0) \cdot \mathbf{v}
-\]
+Questa funzione descrive il valore percorrendo la curva $\gamma$.
+Poiché $F$ dipende da una sola variabile, la sua derivata $F'(0)$ rappresenta la pendenza della funzione lungo il sentiero scelto nel punto $t=0$ (corrispondente a $\mathbf{x}_0$).
 
-Informalmente:
+\vspace{0.6em}
+\textbf{Passo 3: La regola della catena}
+
+La differnziabilità di $f$  ci garantisce che esiste una derivata unica in ogni direzione che approssima la funzione, ossia il gradiente.
+Allora possiamo applicare la regola della catena per calcolare
+\[
+F'(0) = \nabla f(\mathbf{x}_0) \cdot \gamma'(0) 
+\]
+Se poniamo il vettore unitario $\mathbf{v} = \gamma'(0)$, questa quantità coincide con la derivata direzionale di $f$ in $\mathbf{x}_0$ lungo la direzione $\mathbf{v}$
+\[
+\nabla f(\mathbf{x}_0) \cdot \mathbf{v} 
+\]
+Dunque, la regola della catena ci dice che tutte le possibili pendenze di $f$ sono governate dal prodotto scalare tra il gradiente e il vettore direzione.
+
+\vspace{0.6em}
+\textbf{Passo 4: Massimizzare la pendenza}
+
+Ricordando la definizione geometrica di prodotto scalare
+\[
+\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos \theta
+\]
+possiamo scrivere:
+\[
+ D_{\mathbf{v}} f = \|\nabla f(\mathbf{x}_0)\| \cdot \underbrace{\|\mathbf{v}\|}_{=1} \cdot \cos \theta = \|\nabla f(\mathbf{x}_0)\| \cos \theta
+\]
+dove $\theta$ è l'angolo tra il gradiente e il vettore unitario $\mathbf{v}$, che rappresenta la direzione scelta.
+
+Per massimizzare la pendenza $D_{\mathbf{v}} f$, dobbiamo massimizzare $\cos \theta$:
 \begin{itemize}
-    \item $\mathbf{x}_0$ è il punto dove ci si trova sulla superficie;
-    \item la curva $\gamma(t)$ è il "sentiero" che si decide di percorrere;
-    \item $\gamma'(0)=\mathbf{v}$ è il vettore che rappresenta verso dove ci stiamo muovendo;
-    \item $F(t) = f(\gamma(t))$ è la quota (altitudine) a cui si cammina.
-\end{itemize}
-La derivata $F'(0)$ misura quanto velocemente cambia la quota nel tempo, ossia la pendenza sul "sentiero". La regola della catena ci dice praticamente che questa pendenza dipende dal prodotto scalare $\nabla f(\mathbf{x}_0) \cdot \mathbf{v}$.\\
-
-Ora, immaginando di scegliere una direzione qualsiasi $\mathbf{v}$ in cui muoverci ma con il vincolo che la velocità sia unitaria ($\|\mathbf{v}\|=1$), possiamo comprendere quale direzione ci fa salire più velocemente. 
-
-Secondo la proposizione precedente, la derivata direzionale $D_{\mathbf{v}} f$ è data da:
-\[
- D_{\mathbf{v}} f(\mathbf{x}_0) = \nabla f(\mathbf{x}_0) \cdot \mathbf{v}
-\]
-
-Ricordando la definizione geometrica di prodotto scalare ($\mathbf{a} \cdot \mathbf{b} = \|\mathbf{a}\| \|\mathbf{b}\| \cos \theta$), possiamo scrivere:
-\[
- D_{\mathbf{v}} f = \|\nabla f(\mathbf{x}_0)\| \cdot \underbrace{\|\mathbf{v}\|}_{1} \cdot \cos \theta = \|\nabla f(\mathbf{x}_0)\| \cos \theta
-\]
-dove $\theta$ è l'angolo tra il gradiente e la direzione scelta $\mathbf{v}$.
-
-Per massimizzare la pendenza $D_{\mathbf{v}} f$, dobbiamo massimizzare $\cos \theta$.
-Il massimo si ha per $\theta = 0$, ovvero quando la direzione $\mathbf{v}$ è \textbf{parallela e concorde} al gradiente $\nabla f(\mathbf{x}_0)$.
-
-Analizzando il termine $\cos \theta$:
-\begin{itemize}
-    \item \textbf{Massima Crescita ($\theta = 0$):} La derivata è massima quando ci muoviamo nella direzione del gradiente.
+    \item \textbf{Massima Crescita ($\theta = 0$):} La derivata è massima quando ci muoviamo nella direzione del gradiente,
         \[ D_{\mathbf{v}} f = \|\nabla f\| \]
-    \item \textbf{Massima Decrescita ($\theta = \pi$):} La derivata è minima (negativa) quando ci muoviamo in direzione opposta al gradiente.
+    \item \textbf{Massima Decrescita ($\theta = \pi$):} La derivata è minima (negativa) quando ci muoviamo in direzione opposta al gradiente,
         \[ D_{\mathbf{v}} f = -\|\nabla f\| \]
     \item \textbf{Crescita Nulla ($\theta = \pi/2$):} La funzione non cambia valore se ci muoviamo ortogonalmente al gradiente (lungo le curve di livello).
 \end{itemize}
@@ -1182,19 +1191,26 @@ D_{\vec{v}}f(x,y) = \langle f(x,y), \vec{v} \rangle
 
 \textbf{97. Enunciare e dimsotrare la regola della derivazione composta o {\color{red}regola della catena}.}
 
-Se $f$ è differenziabile e $\gamma$ è derivabile, allora la derivata della funzione composta $F(t) = f(\gamma(t))$ è:
+Sia $f: A \subseteq \mathbb{R}^n \to \mathbb{R}$ e sia $\gamma: I \subseteq \mathbb{R} \to A \subseteq \mathbb{R}^n$ una curva regolare (derivabile con derivata continua).
+
+Se $f$ è differenziabile e $\gamma$ è derivabile, allora la funzione composta
+\[
+F(t) = F((f \circ \gamma)(t) = f(\gamma(t))
+\] 
+è derivabile in ogni punto $t \in I$ e vale la seguente formula:
 \[
     F'(t) = \langle \nabla f(\gamma(t)), \gamma'(t) \rangle
 \]
-Che equivale al prodotto scalare tra il gradiente di $f$ e il vettore tangente alla curva $\gamma$.\\
+In altre parole, la derivata della funzione composta equivale al prodotto scalare tra il gradiente di $f$ e il vettore tangente alla curva $\gamma$.
 
+\vspace{0.6em}
 \textbf{\color{thmcolor}DIMOSTRAZIONE}
 
-Consideriamo il rapporto incrementale di $F(t)$ rispetto a un incremento $h \in \mathbb{R}$:
+\textbf{\color{thmcolor}Passo 1}: Consideriamo il rapporto incrementale di $F(t)$ in un punto $t \in I$ rispetto a un incremento $h \in \mathbb{R}$.
 \[
     \frac{F(t+h) - F(t)}{h} = \frac{f(\gamma(t+h)) - f(\gamma(t))}{h}
 \]
-Poiché per ipotesi $f$ è differenziabile nel punto $\mathbf{x} = \gamma(t)$, possiamo scrivere l'incremento di $f$ come somma della parte lineare (gradiente) e dell'errore (o-piccolo).
+Poiché per ipotesi $f$ è differenziabile nel punto $\mathbf{x} = \gamma(t)$, per definizione di differnziabilità possiamo scrivere l'incremento di $f$ come somma della parte lineare (gradiente) e dell'errore (o-piccolo).
 Allora:
 \[
     f(\gamma(t+h)) - f(\gamma(t)) = \langle \nabla f(\gamma(t)), \gamma(t+h) - \gamma(t) \rangle + o(\|\gamma(t+h) - \gamma(t)\|)
@@ -1205,10 +1221,10 @@ Sostituiamo questa espressione nel rapporto incrementale:
 \]
 Per la linearità del prodotto scalare, possiamo portare $1/h$ dentro il primo termine:
 \[
-    = \left\langle \nabla f(\gamma(t)), \frac{\gamma(t+h) - \gamma(t)}{h} \right\rangle + \frac{o(\|\gamma(t+h) - \gamma(t)\|)}{h}
+     \frac{F(t+h) - F(t)}{h} = \left\langle \nabla f(\gamma(t)), \frac{\gamma(t+h) - \gamma(t)}{h} \right\rangle + \frac{o(\|\gamma(t+h) - \gamma(t)\|)}{h}
 \]
-Passiamo ora al limite per $h \to 0$:
 
+\textbf{\color{thmcolor}Passo 2}: Passiamo ora al limite per $h \to 0$.
 
 Poiché $\gamma$ è derivabile in $t$, il rapporto incrementale vettoriale tende alla derivata $\gamma'(t)$:
 \[
@@ -1218,9 +1234,9 @@ Quindi il primo termine tende a:
 \[
     \langle \nabla f(\gamma(t)), \gamma'(t) \rangle
 \]
-Che è esattamente la tesi che cerchiamo. Dobbiamo ora dimostrare che il resto tende a 0.
+Che è esattamente la tesi che cerchiamo. 
 
-Dobbiamo mostrare che:
+\textbf{\color{thmcolor}Passo 3}: Dobbiamo ora dimostrare che il resto tende a 0.
 \[
     \lim_{h \to 0} \frac{o(\|\gamma(t+h) - \gamma(t)\|)}{h} = 0
 \]
@@ -1237,7 +1253,7 @@ Analizziamo i fattori:
     \item \textbf{Fattore (A):} Tende a 0 per definizione di o-piccolo. Infatti, per la continuità di $\gamma$, quando $h \to 0$ anche l'incremento $\|\gamma(t+h) - \gamma(t)\| \to 0$.
     \item \textbf{Fattore (B):}.
     \[
-    \lim_{h \to 0} \Biggl[ \sum_{i=1}^n\Biggl( \frac{ \gamma_i(t+h)-\gamma_i(t)}{h}\Biggr)^2\Biggr]^{\frac{1}{2}} = \Bigg[ \sum_{i=1}^n (\gamma'(t))^2\Bigg]^{\frac{1}{2}} \in \mathbb{R}
+    \lim_{h \to 0} \Biggl[ \sum_{i=1}^n\Biggl( \frac{ \gamma_i(t+h)-\gamma_i(t)}{h}\Biggr)^2\Biggr]^{\frac{1}{2}} = \Bigg[ \sum_{i=1}^n (\gamma_i'(t))^2\Bigg]^{\frac{1}{2}} \in \mathbb{R}
     \]
     Tende alla norma della derivata $\|\gamma'(t)\|$, che è un numero reale finito (la derivata esiste per ipotesi)
 
