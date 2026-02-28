@@ -8,7 +8,7 @@ Clicca qui per scaricare il PDF:
 
 [Equazioni differenziali](./PDF-di-Analisi-2/equazioniDifferenziali.pdf)
 
-[Cenni di algebra lineare e topologia sugli spazi vettoriali](./PDF-di-Analisi-2/topologiaSugliSpaziMetrici.pdf)
+[Cenni e topologia sugli spazi vettoriali](./PDF-di-Analisi-2/topologiaSugliSpaziMetrici.pdf)
 
 [Calcolo differenziale](./PDF-di-Analisi-2/calcoloDifferenziale.pdf)
 
