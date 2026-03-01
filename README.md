@@ -1,6 +1,8 @@
 # Appunti-di-Analisi-2
 [Lista di tutti gli argomenti trattati a lezione](./programmaAnalisi2.pdf)
+
 [Documento completo](./corsoAnalisi2.pdf)
+
 Sono gli appunti che ho scritto dopo aver seguito l'intero corso di Analisi 2. Sono un unione di appunti presi a lezione e appunti presi da altri testi.
 
 ## 📥 Download
